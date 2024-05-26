@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Add Work";
+}
+<body>
+    <form asp-controller="Product" asp-action="addProduct" method="post">
+        <p>Add Work</p>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="price" placeholder="$100" required>
+        <input type="text" name="description" placeholder="Enter description..." required>
+        <input type="text" name="availability" placeholder="Availability (Yes/No)" required>
+        <input type="text" name="category" placeholder="Enter category..." required>
+        <button type="submit">Submit</button>
+    </form>
+</body>

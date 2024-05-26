@@ -5,16 +5,29 @@ namespace CLDVapp.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly LoginFeature login;
 
-        public Table_1 tbl = new Table_1();
-
-
-        [HttpPost]
-        public ActionResult SignUp(Table_1 Users)
+        public LoginController()
         {
-            var result = tbl.insert_User(Users);
-            return RedirectToAction("Index", "Home");
+            login = new LoginFeature();
         }
 
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            var login = new LoginFeature();
+            int userID = login.FetchUser(email, password);
+            if (userID != -1)
+            {
+                HttpContext.Session.SetInt32("userID", userID); //Code for the cookie was learned from this website https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-8.0
+                return RedirectToAction("Index", "Home", new { userID = userID });
+
+            }
+            else
+            {
+                return View("~/Views/Home/loginPage.cshtml");
+
+            }
+        }
     }
 }

@@ -18,7 +18,17 @@ namespace CLDVapp.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult signUp()
+        {
+            return View();
+        }
+
+        public IActionResult addWork()
+        {
+            return View();
+        }
+
+        public IActionResult loginPage()
         {
             return View();
         }
@@ -30,10 +40,15 @@ namespace CLDVapp.Controllers
 
         public IActionResult Work()
         {
-            return View();
+            return RedirectToAction("Work", "Product");
         }
 
         public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult transactionPage()
         {
             return View();
         }

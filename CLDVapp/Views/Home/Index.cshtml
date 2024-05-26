@@ -1,4 +1,11 @@
-﻿@{
+﻿﻿@{
+    var UserID = ViewData["UserID"];
+}
+@if (UserID != null)
+{
+    <p>User ID: @UserID</p>
+}
+@{
     ViewData["Title"] = "KhumaloCraft Emporium";
 }
 

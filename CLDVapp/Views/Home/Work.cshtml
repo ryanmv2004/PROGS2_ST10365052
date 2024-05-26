@@ -1,84 +1,95 @@
-﻿
+﻿@model List<CLDVapp.Models.productTable>
+
 @{
     ViewData["Title"] = "Work";
 }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var product in Model)
+    {
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Item Details</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
 
-        .item-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
+                .item-card {
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    margin-bottom: 20px;
+                }
 
-        .item-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+                .item-image {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                }
 
-        .item-details {
-            padding: 10px;
-        }
+                .item-details {
+                    padding: 10px;
+                }
 
-        .item-price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #007bff;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="item-card">
-            <img src="/images/item1.jpg" height="100" width="100">
-            <div class="item-details">
-                <h2>Artisinal Pottery Vase</h2>
-                <p>a stunning fusion of artistry and functionality that brings timeless beauty to any space.</p>
-                <span class="item-price">$50</span>
+                .item-price {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #007bff;
+                    margin-top: 10px;
+                }
+
+                .purchase-button {
+                    display: inline-block;
+                    padding: 10px 15px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #fff;
+                    background-color: #28a745;
+                    border: none;
+                    border-radius: 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    cursor: pointer;
+                    margin-top: 15px;
+                }
+
+                    .purchase-button:hover {
+                        background-color: #218838;
+                    }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="item-card">
+                    <img src="item-image.jpg" alt="Item Image" class="item-image">
+                    <div class="item-details">
+                        <form asp-action="AddTransaction" asp-controller="Transaction" method="post">
+                            <input type="hidden" name="userID" value="@ViewData["UserID"]" />
+                            <input type="hidden" value="@product.productID" name="productID" />
+                        <h2>@product.name</h2>
+                        <p>@product.description</p>
+                        <span class="item-price">@product.price</span>
+                            <button type="submit" class="purchase-button">Order Now</button>
+                        </form>
+
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</body>
-<body>
-    <div class="container">
-        <div class="item-card">
-            <img src="/images/item2.jpg" height="100" width="100">
-            <div class="item-details">
-                <h2>Embroided Blanket</h2>
-                <p>A testament to the beauty of intricate craftsmanship and cozy comfort. Each blanket is meticulously handcrafted by skilled artisans, who infuse every stitch with passion and dedication, resulting in a work of art that exudes warmth and elegance..</p>
-                <span class="item-price">$20</span>
-            </div>
-        </div>
-    </div>
-</body>
-<body>
-    <div class="container">
-        <div class="item-card">
-            <img src="/images/item3.jpg" height="100" width="100">
-            <div class="item-details">
-                <h2>Leather Shoe</h2>
-                <p>Each pair is meticulously crafted by skilled artisans who pour their expertise and passion into every stitch, ensuring unparalleled quality and durability.</p>
-                <span class="item-price">$40</span>
-            </div>
-        </div>
-    </div>
-</body>
-
+        </body>
+    }
+}
+else
+{
+    <div>No products found.</div>
+}
