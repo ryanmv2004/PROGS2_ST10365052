@@ -72,14 +72,17 @@
         <body>
             <div class="container">
                 <div class="item-card">
-                    <img src="item-image.jpg" alt="Item Image" class="item-image">
+                    <img src="@product.url" alt="@product.name style="width:50px;height:50px;">
                     <div class="item-details">
                         <form asp-action="AddTransaction" asp-controller="Transaction" method="post">
                             <input type="hidden" name="userID" value="@ViewData["UserID"]" />
-                            <input type="hidden" value="@product.productID" name="productID" />
-                        <h2>@product.name</h2>
-                        <p>@product.description</p>
-                        <span class="item-price">@product.price</span>
+                            <input type="hidden" name="productID" value="@product.productID" />
+                            <input type="hidden" name="name" value="@product.name" />
+                            <input type="hidden" name="description" value="@product.description" />
+                            <input type="hidden" name="price" value="@product.price" />
+                            <h2>@product.name</h2>
+                            <p>@product.description</p>
+                            <span class="item-price">@product.price</span>
                             <button type="submit" class="purchase-button">Order Now</button>
                         </form>
 

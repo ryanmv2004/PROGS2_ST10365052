@@ -1,14 +1,106 @@
 ﻿@{
     ViewData["Title"] = "Add Work";
 }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-group textarea {
+                resize: vertical;
+            }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .submit-button:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
 <body>
-    <form asp-controller="Product" asp-action="addProduct" method="post">
-        <p>Add Work</p>
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="price" placeholder="$100" required>
-        <input type="text" name="description" placeholder="Enter description..." required>
-        <input type="text" name="availability" placeholder="Availability (Yes/No)" required>
-        <input type="text" name="category" placeholder="Enter category..." required>
-        <button type="submit">Submit</button>
-    </form>
+
+    <div class="container">
+        <h2>Add a New Product</h2>
+        <form asp-controller="Product" asp-action="addProduct" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="Price">Price:</label>
+                <input type="text" name="price" placeholder= "$10" required>
+            </div>
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" name="description" placeholder="Enter a description..." required>
+            </div>
+            <div class="form-group">
+                <label for="Availability">Availability:</label>
+                <input type="text" name="availability" placeholder="Yes/No" required>
+            </div>
+            <div class="form-group">
+                <label for="Category">Category:</label>
+                <input type="text" name="category" placeholder="Category" required>
+            </div>
+            <div class="form-group">
+                <label for="Url">Image URL:</label>
+                <input type="text" name="url" placeholder="url" required>
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+
+    @{
+        var alertMessage = TempData["AlertMessage"] as string;
+    }
+
+    @if (!string.IsNullOrEmpty(alertMessage))
+    {
+        <script>
+            alert("@Html.Raw(alertMessage)");
+        </script>
+    }
+
 </body>
+

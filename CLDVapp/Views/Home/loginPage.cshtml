@@ -53,7 +53,17 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <input type="submit" value="Login">
+            <p class="signpp">Don't have an account ? <a href="@Url.Action("signUp","Home")">Sign Up</a> </p>
         </form>
     </div>
+
+    <script>
+        var message = '@TempData["AlertMessage"]';
+        if (message) {
+            alert(message);
+        }
+    </script>
+
 </body>
 </html>
+

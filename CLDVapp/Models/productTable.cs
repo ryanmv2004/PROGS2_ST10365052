@@ -11,6 +11,7 @@ namespace CLDVapp.Models
         public string description { get; set; }
         public string availability { get; set; }
         public string category { get; set; }
+        public string url { get; set; }
 
         public static string con_string = "Server=tcp:st10365052cldva1.database.windows.net,1433;Initial Catalog=st10365052cdlbdatabse;Persist Security Info=False;User ID=ryanv2304;Password=AceVents12;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public static SqlConnection con = new SqlConnection(con_string);
@@ -19,7 +20,7 @@ namespace CLDVapp.Models
         {
             try
             {
-                string sql = "INSERT INTO productTable (Name, Price, Description, Availability, Category) VALUES (@name, @price, @description, @availability, @category)";
+                string sql = "INSERT INTO productTable (Name, Price, Description, Availability, Category, prodURL) VALUES (@name, @price, @description, @availability, @category, @prodUrl)";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -28,6 +29,7 @@ namespace CLDVapp.Models
                 cmd.Parameters.AddWithValue("@description", m.description);
                 cmd.Parameters.AddWithValue("@availability", m.availability);
                 cmd.Parameters.AddWithValue("@category", m.category);
+                cmd.Parameters.AddWithValue("@prodURL", m.url);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 con.Close();
@@ -46,7 +48,7 @@ namespace CLDVapp.Models
 
             try
             {
-                string sql = "SELECT * FROM productTable";
+                string sql = "SELECT * FROM [dbo].[productTable]";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 con.Open();
@@ -56,11 +58,13 @@ namespace CLDVapp.Models
                 {
                     products.Add(new productTable
                     {
-                        name = reader["name"].ToString(),
-                        price = reader["price"].ToString(),
-                        description = reader["description"].ToString(),
-                        availability = reader["availability"].ToString(),
-                        category = reader["category"].ToString()
+                        productID = Convert.ToInt32(reader["ProductID"]),
+                        name = reader["Name"].ToString(),
+                        price = reader["Price"].ToString(),
+                        description = reader["Description"].ToString(),
+                        availability = reader["Availability"].ToString(),
+                        category = reader["Category"].ToString(),
+                        url= reader["prodURL"].ToString()
                     });
                 }
 

@@ -5,6 +5,7 @@ namespace CLDVapp.Models
 {
     public class transactionTable 
     {
+        public int transactionID { get; set; }
         public int userID { get; set; }
         public int productID { get; set; }
         public string name { get; set; }
@@ -30,7 +31,40 @@ namespace CLDVapp.Models
                 con.Close();
                 return rowsAffected;
         }
-        
+
+        public List<transactionTable> getTransactions(int userID)
+        {
+            List<transactionTable> transactions = new List<transactionTable>();
+            try
+            {
+                string sql = "SELECT * FROM[dbo].[transactionTable]WHERE UserID = @userID";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@userID", userID);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    transactions.Add(new transactionTable
+                    {
+                        transactionID = Convert.ToInt32(reader["transactionID"]),
+                        userID = Convert.ToInt32(reader["userID"]),
+                        productID = Convert.ToInt32(reader["productID"]),
+                        name = reader["name"].ToString(),
+                        description = reader["description"].ToString(),
+                        price = reader["price"].ToString(),
+                    });
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return transactions;
+        }
+
     }
 
     
