@@ -25,7 +25,7 @@ namespace CLDVapp.Controllers
 
         public IActionResult addWork()
         {
-            return RedirectToAction("addWork", "Product");
+            return View();
         }
 
         public IActionResult loginPage()
@@ -40,7 +40,7 @@ namespace CLDVapp.Controllers
 
         public IActionResult Work()
         {
-            return RedirectToAction("Work", "Product");
+            return View();
         }
 
         public IActionResult About()

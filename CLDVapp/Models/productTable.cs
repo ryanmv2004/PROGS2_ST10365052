@@ -29,7 +29,7 @@ namespace CLDVapp.Models
                 cmd.Parameters.AddWithValue("@description", m.description);
                 cmd.Parameters.AddWithValue("@availability", m.availability);
                 cmd.Parameters.AddWithValue("@category", m.category);
-                cmd.Parameters.AddWithValue("@prodURL", m.url);
+                cmd.Parameters.AddWithValue("@prodUrl", m.url);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 con.Close();
@@ -64,7 +64,7 @@ namespace CLDVapp.Models
                         description = reader["Description"].ToString(),
                         availability = reader["Availability"].ToString(),
                         category = reader["Category"].ToString(),
-                        url= reader["prodURL"].ToString()
+                        url = reader["prodURL"].ToString()
                     });
                 }
 
@@ -77,6 +77,5 @@ namespace CLDVapp.Models
 
             return products;
         }
-
     }
 }

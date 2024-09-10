@@ -1,98 +1,162 @@
-﻿@model List<CLDVapp.Models.productTable>
-
-@{
-    ViewData["Title"] = "Work";
+﻿@{
+    ViewData["Title"] = "View Claims";
 }
 
-@if (Model != null && Model.Count > 0)
-{
-    foreach (var product in Model)
-    {
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Item Details</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims List - Contract Monthly Claim System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
 
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                }
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
 
-                .item-card {
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    overflow: hidden;
-                    margin-bottom: 20px;
-                }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-                .item-image {
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                }
+            table th, table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
 
-                .item-details {
-                    padding: 10px;
-                }
+            table th {
+                background-color: #4CAF50;
+                color: white;
+            }
 
-                .item-price {
-                    font-size: 18px;
-                    font-weight: bold;
-                    color: #007bff;
-                    margin-top: 10px;
-                }
+            table tr:hover {
+                background-color: #f1f1f1;
+            }
 
-                .purchase-button {
-                    display: inline-block;
-                    padding: 10px 15px;
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #fff;
-                    background-color: #28a745;
-                    border: none;
-                    border-radius: 5px;
-                    text-align: center;
-                    text-decoration: none;
-                    cursor: pointer;
-                    margin-top: 15px;
-                }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
 
-                    .purchase-button:hover {
-                        background-color: #218838;
-                    }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="item-card">
-                    <img src="@product.url" alt="@product.name style="width:50px;height:50px;">
-                    <div class="item-details">
-                        <form asp-action="AddTransaction" asp-controller="Transaction" method="post">
-                            <input type="hidden" name="userID" value="@ViewData["UserID"]" />
-                            <input type="hidden" name="productID" value="@product.productID" />
-                            <input type="hidden" name="name" value="@product.name" />
-                            <input type="hidden" name="description" value="@product.description" />
-                            <input type="hidden" name="price" value="@product.price" />
-                            <h2>@product.name</h2>
-                            <p>@product.description</p>
-                            <span class="item-price">@product.price</span>
-                            <button type="submit" class="purchase-button">Order Now</button>
-                        </form>
+            a:hover {
+                text-decoration: underline;
+            }
+        /* Button Styling */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
 
+        .btn-accept {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+            .btn-accept:hover {
+                background-color: #45a049;
+            }
+
+        .btn-reject {
+            background-color: #f44336;
+            color: white;
+        }
+
+            .btn-reject:hover {
+                background-color: #e53935;
+            }
+        /* Comment Box */
+        .comment-box {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        /* Form Styling */
+        .action-cell {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-buttons {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Claims List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Hours Worked</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>40</td>
+                <td><a href="documents/john_doe_claim.pdf" target="_blank">View Document</a></td>
+                <td class="action-cell">
+                    <div class="action-buttons">
+                        <button class="btn btn-accept">Accept</button>
+                        <button class="btn btn-reject">Reject</button>
                     </div>
-                </div>
-            </div>
-        </body>
-    }
-}
-else
-{
-    <div>No products found.</div>
-}
+                    <input type="text" class="comment-box" placeholder="Add a comment">
+                </td>
+            </tr>
+            <tr>
+                <td>Jane</td>
+                <td>Smith</td>
+                <td>35</td>
+                <td><a href="documents/jane_smith_claim.pdf" target="_blank">View Document</a></td>
+                <td class="action-cell">
+                    <div class="action-buttons">
+                        <button class="btn btn-accept">Accept</button>
+                        <button class="btn btn-reject">Reject</button>
+                    </div>
+                    <input type="text" class="comment-box" placeholder="Add a comment">
+                </td>
+            </tr>
+            <tr>
+                <td>Michael</td>
+                <td>Johnson</td>
+                <td>45</td>
+                <td><a href="documents/michael_johnson_claim.pdf" target="_blank">View Document</a></td>
+                <td class="action-cell">
+                    <div class="action-buttons">
+                        <button class="btn btn-accept">Accept</button>
+                        <button class="btn btn-reject">Reject</button>
+                    </div>
+                    <input type="text" class="comment-box" placeholder="Add a comment">
+                </td>
+            </tr>
+            <!-- Add more claims as needed -->
+        </tbody>
+    </table>
+
+</body>
+</html>
