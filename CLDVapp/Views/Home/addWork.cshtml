@@ -1,10 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Add Work";
+    ViewData["Title"] = "Submit Claim";
     Layout = "_Layout";
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Claim - Contract Monthly Claim System</title>
+    <title>@ViewData["Title"] - Contract Monthly Claim System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,31 +66,31 @@
                 background-color: #45a049;
             }
     </style>
-
+</head>
 <body>
+    <div class="container">
+        <!-- The layout's navbar should appear here -->
+        <div class="claim-container">
+            <h2>Submit Your Claim</h2>
+            <form action="/submit_claim" method="post" enctype="multipart/form-data">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
 
-    <div class="claim-container">
-        <h2>Submit Your Claim</h2>
-        <form action="/submit_claim" method="post" enctype="multipart/form-data">
-            <label for="firstname">First Name</label>
-            <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
 
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+                <label for="hoursworked">Hours Worked</label>
+                <input type="number" id="hoursworked" name="hoursworked" placeholder="Enter hours worked" required>
 
-            <label for="hoursworked">Hours Worked</label>
-            <input type="number" id="hoursworked" name="hoursworked" placeholder="Enter hours worked" required>
+                <label for="university">University Name</label>
+                <input type="text" id="university" name="university" placeholder="Enter your university name" required>
 
-            <label for="university">University Name</label>
-            <input type="text" id="university" name="university" placeholder="Enter your university name" required>
+                <label for="document">Supporting Document (PDF)</label>
+                <input type="file" id="document" name="document" accept=".pdf" required>
 
-            <label for="document">Supporting Document (PDF)</label>
-            <input type="file" id="document" name="document" accept=".pdf" required>
-
-            <input type="submit" value="Submit Claim">
-        </form>
+                <input type="submit" value="Submit Claim">
+            </form>
+        </div>
     </div>
-
 </body>
 </html>
-
