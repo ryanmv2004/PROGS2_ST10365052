@@ -33,7 +33,7 @@ namespace CLDVapp.Controllers
             return View();
         }
 
-        public IActionResult ContactUs()
+        public IActionResult Privacy()
         {
             return View();
         }
@@ -42,12 +42,6 @@ namespace CLDVapp.Controllers
         {
             return View();
         }
-
-        public IActionResult About()
-        {
-            return View();
-        }
-
         public IActionResult transactionPage()
         {
             return RedirectToAction("transactionPage", "Transaction");
